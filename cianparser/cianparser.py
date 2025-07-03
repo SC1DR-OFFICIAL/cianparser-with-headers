@@ -18,11 +18,11 @@ def list_metro_stations():
 
 
 class CianParser:
-    def __init__(self, location: str, proxies=None):
+    def __init__(self, location: str, proxies=None, headers=None):
         """
         Initialize the Cian website parser
         Examples:
-            >>> moscow_parser = cianparser.CianParser(location="Москва")
+            >>> moscow_parser = cianparser.CianParser(location="Москва", headers=default_headers)
         :param str location: location. e.g. "Москва", for see all correct values use cianparser.list_locations()
         :param proxies: proxies for executing requests (https scheme), default None
         """
@@ -31,7 +31,22 @@ class CianParser:
 
         self.__parser__ = None
         self.__session__ = cloudscraper.create_scraper()
-        self.__session__.headers = {'Accept-Language': 'en'}
+
+        # Стандартные заголовки
+        default_headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/126.0 Safari/537.36"
+            ),
+            "Accept-Language": "ru-RU,ru;q=0.9",
+        }
+
+        # Обновляем либо переданными заголовками, либо используем стандартные
+        if headers:
+            default_headers.update(headers)
+        self.__session__.headers.update(default_headers)
+
         self.__proxy_pool__ = ProxyPool(proxies=proxies)
         self.__location_name__ = location
         self.__location_id__ = location_id
