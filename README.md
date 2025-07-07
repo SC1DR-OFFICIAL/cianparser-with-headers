@@ -1,11 +1,29 @@
 ### Сбор данных с сайта объявлений об аренде и продаже недвижимости Циан
 
+⚠ Этот проект является форком оригинального репозитория  
+[https://github.com/lenarsaitov/cianparser](https://github.com/lenarsaitov/cianparser).
+
+В этой версии добавлена поддержка передачи пользовательских HTTP-заголовков (`headers`) при инициализации `CianParser` для более гибкой работы с User-Agent и другими параметрами запроса.
+
+По умолчанию используются headers:
+
+```python
+default_headers = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/126.0 Safari/537.36"
+    ),
+    "Accept-Language": "ru-RU,ru;q=0.9",
+}
+```
+
 Cianparser - это библиотека Python 3 (версии 3.8 и выше) для парсинга сайта  [Циан](http://cian.ru).
 С его помощью можно получить достаточно подробные и структурированные данные по краткосрочной и долгосрочной аренде, продаже квартир, домов, танхаусов итд.
 
 ### Установка
 ```bash
-pip install cianparser
+pip install git+https://github.com/SC1DR-OFFICIAL/cianparser-with-headers.git
 ```
 
 ### Использование
